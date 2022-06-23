@@ -90,7 +90,11 @@ router.get('/get/customer/:id', (req, res) => {
     order.findAll({
         where: {
             cartId: id
-        }
+        },
+        order: [
+            ['order_date', 'DESC'],
+            ['status', 'DESC'],
+        ],
     }).then((data) => {
         res.send(data);
     });
@@ -103,7 +107,11 @@ router.get('/get/shopper/:id', (req, res) => {
     order.findAll({
         where: {
             shopperId: id
-        }
+        },
+        order: [
+            ['order_date', 'DESC'],
+            ['status', 'DESC'],
+        ],
     }).then((data) => {
         res.send(data);
     });
@@ -181,7 +189,7 @@ router.patch('/update/:id', (req, res) => {
         shipping_courier,
         tracking_number,
         shipping_date,
-        status: 'Shipped'
+        status: 'In Shipping'
     }, {
         where: {
             id: id

@@ -74,5 +74,19 @@ router.get('/getId/:id', (req,res) => {
     });
 });
 
+router.delete('/delete/:cartId/:productId', (req,res) => {
+
+    cartProduct.destroy({
+        where: {
+            cartId: req.params.cartId,
+            productId: req.params.productId,
+            status: 'in_cart'
+        }
+    }).then(() => {
+        res.sendStatus(200);
+    });
+
+});
+
 
 module.exports = router;
